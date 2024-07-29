@@ -5,11 +5,9 @@ import ReactDOM from 'react-dom/client';
 import Login from './lobby_assests/login_screen';
 import reportWebVitals from './reportWebVitals';
 
-// function conx(){
-//   return{
-//     useEffect(())
-//   }
-// }
+const Informations = async() =>{
+  
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
