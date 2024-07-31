@@ -12,7 +12,7 @@ def create_cursor(query):
 
 def login_actions(data):
     result = create_cursor(querys.ret_LOGIN(data["email"], data["password"]))
-    if len(result): return result
+    return ["Email or password incorrect", result][int(len([]) == 0)]
 
 def signin_actions(data):
     result = create_cursor(
@@ -25,3 +25,5 @@ def signin_actions(data):
         )
     )
     return "INSERT" in result
+
+print(int(len(["a"]) == 0))

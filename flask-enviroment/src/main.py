@@ -11,7 +11,7 @@ def lobby():
     data = request.get_json()
     if (data["type"] == "login"):
         content = login_actions(data=data)
-        return content
+        return content, 200
 
     elif (data["type"] == "signin"):
         if(signin_actions(data=data)):
