@@ -1,7 +1,5 @@
-import dotenv
-import os 
-
-dotenv.load_dotenv()
+import os
+from src.enviroment import dotenv
 
 def getElement(Element) -> vars:
     try: ret = os.getenv("Element")
