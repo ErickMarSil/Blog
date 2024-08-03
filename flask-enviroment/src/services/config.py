@@ -1,5 +1,5 @@
 from flask import Flask
-from enviroment.environ import getElement
+from src.enviroment.environ import getElement
 
 def setConfigs(app:Flask, runner:bool) -> Flask:
     app.config["SECRET_KEY"] = getElement("SECRET_KEY")

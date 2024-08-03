@@ -1,5 +1,5 @@
 from flask import Flask
-from config import setConfigs
+from src.services.config import setConfigs
 
 app:Flask = setConfigs(Flask(__name__), __name__)
 
