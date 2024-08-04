@@ -1,7 +1,8 @@
 from flask import Flask
-from src.services.enviroment  import getElement
+from src.enviroment  import getElement
 from src import db
 from src.routes.login_bp_env.configure import login_bp
+from src.routes.sigin_bp_env.configure import signin_bp
 
 def setConfigs(app:Flask) -> Flask:
     # set app configurations
@@ -15,5 +16,6 @@ def setConfigs(app:Flask) -> Flask:
 
     # set blueprints for app object
     app.register_blueprint(login_bp)
+    app.register_blueprint(signin_bp)
 
     return app
