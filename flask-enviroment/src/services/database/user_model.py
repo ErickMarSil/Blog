@@ -1,9 +1,9 @@
-from src.models import db
+from src import db
 
 class Bases(db.Model):
     def validate_login_credentials(content):
-        # take all the user informations
         # validate password in the hash module
+        
         # if corrects return all the content
         # otherwise return none content
         pass

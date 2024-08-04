@@ -1,7 +1,7 @@
 from flask import Flask
-from src.enviroment import getElement
-from src.models import db
-from src.endpoints.login_bp_env.configure import login_bp
+from src.services.enviroment  import getElement
+from src import db
+from src.routes.login_bp_env.configure import login_bp
 
 def setConfigs(app:Flask) -> Flask:
     # set app configurations

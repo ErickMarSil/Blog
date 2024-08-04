@@ -1,6 +1,7 @@
 from flask import Flask
-from src.services.config_app import setConfigs
+from src.config_app import setConfigs
 from src.jwt_initialize.init_jwt import setJWT
+
 
 app:Flask = setConfigs(Flask(__name__))
 setJWT(app)

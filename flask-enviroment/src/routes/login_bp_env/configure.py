@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from src.auth.auth_actions import generate_token
+from src.models.auth.auth_actions import generate_token
 
 login_bp = Blueprint("login", __name__)
 blueprint_url = "/login"
