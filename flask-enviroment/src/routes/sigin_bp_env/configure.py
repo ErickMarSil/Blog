@@ -11,21 +11,16 @@ action = Actions()
 def signin_method():
     content = request.get_json()
     token = ""
+    # content["password"] = action.SetHashInfos(password=content["password"])
     credentials_validation = action.insert_signin_credentiasl(content=content)
-
     if credentials_validation:
         token = generate_token(content)
-        return {
-            "token":token,
-            "valid":credentials_validation,
-            "message":"Login feito com sucesso, tome o seu token"
-        }
-    else:
-        return {
-            "token":"",
-            "valid":credentials_validation,
-            "message":"Login não realizado, sem token para você >:("
-        }
-        
+
+    return {
+        "token":token,
+        "valid":credentials_validation,
+        "message":"Login feito com sucesso, tome o seu token"
+    }
+
     # otherwise, else incorrect, return json error without token
     pass
