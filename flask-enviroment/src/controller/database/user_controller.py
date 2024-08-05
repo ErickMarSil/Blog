@@ -11,37 +11,46 @@ class Actions:
         self.HashInstance:Hash
 
     def validate_login_credentials(self, content):
-        self.SetUserInfos(content=content)
-        statement = select(self.UsersInstance).where(self.UsersInstance.email == content["email"]).columns()
-        passwod = select(self.HashInstance).where(self.Hash.id == statement.column("id")).columns()
-
-        with sessionObj() as session:
-            pass
+        pass
 
     def insert_signin_credentiasl(self, content):
-        with sessionObj() as session:
-            if session.execute(text("SELECT * FROM users_info WHERE email = '%s';" % content["email"])).rowcount > 0: return False
+        try:
+            with sessionObj() as session:
+                # check if email already exist
+                if session.execute(text("SELECT * FROM users_info WHERE email = '%s';" % content["email"])).rowcount > 0: return False
 
-            self.SetUserInfos(content=content)
-            session.add(self.UsersInstance)
-            self.UsersInstance.password = str(self.SetHashInfos(password=content["password"]))
-            session.commit()
+                # create password and set it in the 
+                self.SetUserInfos(content=content)
+                session.add(self.UsersInstance)
+                session.commit()
+                session.refresh(self.UsersInstance)
 
+                # generate the hash password
+                hashed_password = self.SetHashInfos(password=self.UsersInstance.password)
+                self.UsersInstance.password = hashed_password
+                session.add(self.UsersInstance)
+                session.commit()
+
+                return True
+        except():
+            return False
+        
     def SetUserInfos(self, content):
         self.UsersInstance = Users(
             first_name=content["first_name"],
             last_name=content["last_name"],
             email=content["email"],
             password=content["password"],
-            birth_date=content["birth_date"]
+            birth_date=content["birth_date"],
+            nickname=content["nickname"]
         )
         
-    def SetHashInfos(self,  password, user_id, salt="") -> str:
+    def SetHashInfos(self,  password, salt="") -> str:
         gen_password = generate_hash(password, salt)
         self.HashInstance = Hash(
             password_hash=gen_password["hash"],
             salt=gen_password["salt"],
-            user_id=user_id
+            user_id=self.UsersInstance.id
         )
         with sessionObj() as session:
             session.add(self.HashInstance)

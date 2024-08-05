@@ -10,17 +10,27 @@ action = Actions()
 @signin_bp.route(blueprint_url, methods=methods)
 def signin_method():
     content = request.get_json()
-    token = ""
-    # content["password"] = action.SetHashInfos(password=content["password"])
     credentials_validation = action.insert_signin_credentiasl(content=content)
-    if credentials_validation:
-        token = generate_token(content)
-
-    return {
-        "token":token,
-        "valid":credentials_validation,
-        "message":"Login feito com sucesso, tome o seu token"
-    }
+    if action.insert_signin_credentiasl(content=content):
+        return {
+            "valid":True,
+            "redirect":{
+                "doRedirect":True,
+                "routeHttp":"/login"
+            },
+            "message":"Cadastro feito com sucesso, vá até o login"
+        }
+    else:
+        return {
+            "valid":False,
+            "redirect":{
+                "doRedirect":False,
+                "routeHttp":""
+            },
+            "message":"Cadastro não realizado, tente novamente"
+        }
+    
+    
 
     # otherwise, else incorrect, return json error without token
     pass
