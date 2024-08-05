@@ -11,13 +11,29 @@ class Actions:
         self.HashInstance:Hash
 
     def validate_login_credentials(self, content):
+        # confirm if the email is correct, if so get the user id
+        with sessionObj() as session:
+            user_if = session.execute(text(
+                "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
+            )).all()
+            hash_password = generate_hash(content["password"], session.execute(text(
+                "SELECT salt FROM hash WHERE user_id = '%s'" % user_if
+            )))
+
+            # hash the reviced password with salt id
+
+
+            # check if is the same hashed password
+            # return user credentials or not
         pass
 
-    def insert_signin_credentiasl(self, content):
+    def insert_signin_credentiasl(self, content) -> bool:
         try:
             with sessionObj() as session:
                 # check if email already exist
-                if session.execute(text("SELECT * FROM users_info WHERE email = '%s';" % content["email"])).rowcount > 0: return False
+                if session.execute(text(
+                    "SELECT * FROM users_info WHERE email = '%s';" % content["email"]
+                    )).rowcount > 0: return False
 
                 # create password and set it in the 
                 self.SetUserInfos(content=content)
@@ -27,11 +43,16 @@ class Actions:
 
                 # generate the hash password
                 hashed_password = self.SetHashInfos(password=self.UsersInstance.password)
+                session.add(self.HashInstance)
+                session.commit()
+
+                # set new hash password to the user
                 self.UsersInstance.password = hashed_password
                 session.add(self.UsersInstance)
                 session.commit()
 
-                return True
+            return True
+        
         except():
             return False
         
@@ -44,16 +65,13 @@ class Actions:
             birth_date=content["birth_date"],
             nickname=content["nickname"]
         )
-        
-    def SetHashInfos(self,  password, salt="") -> str:
+    
+    def SetHashInfos(self, password, salt="") -> str:
         gen_password = generate_hash(password, salt)
         self.HashInstance = Hash(
             password_hash=gen_password["hash"],
             salt=gen_password["salt"],
             user_id=self.UsersInstance.id
         )
-        with sessionObj() as session:
-            session.add(self.HashInstance)
-            session.commit()
-
+        
         return gen_password["hash"]

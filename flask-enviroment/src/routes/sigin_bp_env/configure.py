@@ -11,7 +11,7 @@ action = Actions()
 def signin_method():
     content = request.get_json()
     credentials_validation = action.insert_signin_credentiasl(content=content)
-    if action.insert_signin_credentiasl(content=content):
+    if credentials_validation:
         return {
             "valid":True,
             "redirect":{
