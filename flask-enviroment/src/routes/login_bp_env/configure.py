@@ -13,17 +13,17 @@ def login_method():
     token = ""
     credentials_validation = action.validate_login_credentials(content=content)
 
-    if credentials_validation:
+    if len(credentials_validation) > 0:
         token = generate_token(content)
         return {
             "token":token,
-            "valid":credentials_validation,
+            "valid":True,
             "message":"Login feito com sucesso, tome o seu token"
         }
     else:
         return {
             "token":"",
-            "valid":credentials_validation,
+            "valid":False,
             "message":"Login não realizado, sem token para você >:("
         }
         

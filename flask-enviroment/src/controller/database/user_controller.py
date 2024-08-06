@@ -1,7 +1,6 @@
 from src.controller.database import sessionmaker, sessionObj, select
 from src.models.users_model import Users, Hash
 from src.services.hash.hash_actions import generate_hash
-from src import db
 
 from sqlalchemy import text
 
@@ -16,17 +15,21 @@ class Actions:
             user_id = session.execute(text(
                 "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
             )).one()
-            hash_password = generate_hash(content["password"], session.execute(text(
+            hash_password = generate_hash(content["password"].encode("UTF-8"), session.execute(text(
                 "SELECT hash.salt FROM hash WHERE user_id = %s" % user_id[0]
-            )).one()[0])
+            )).one()[0])["hash"]
 
-            pass
-            # hash the reviced password with salt id
-            
-
-            # check if is the same hashed password
-            # return user credentials or not
-        pass
+            if user_id[4] == hash_password:
+                return {
+                    "first_name":user_id[1],
+                    "last_name":user_id[2],
+                    "email":user_id[3],
+                    "birth_date":user_id[5],
+                    "nickname":user_id[6]
+                }
+            else:
+                return {}
+                    
 
     def insert_signin_credentiasl(self, content) -> bool:
         try:
@@ -68,7 +71,7 @@ class Actions:
         )
     
     def SetHashInfos(self, password, salt="") -> str:
-        gen_password = generate_hash(password, salt)
+        gen_password = generate_hash((password.encode("UTF-8")), salt)
         self.HashInstance = Hash(
             password_hash=gen_password["hash"],
             salt=gen_password["salt"],
