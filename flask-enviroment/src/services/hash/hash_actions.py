@@ -1,10 +1,16 @@
 import bcrypt
 
-def generate_hash(ori_password:str, salt=""):
-    if salt == "": salt = generate_salt()
+def generate_hash(ori_password, salt=None):
+    if salt == None or salt == "": salt = generate_salt()
 
-    hash_obj = bcrypt.hashpw(password=ori_password.encode(), salt=salt)
-    return {"hash":hash_obj.hexdigest(), "salt":salt}
+    if "bytes" in str(type(salt)):
+        pass
+
+    if "bytes" in str(type(ori_password)):
+        pass
+
+    hash_obj = bcrypt.hashpw(password=ori_password, salt=salt)
+    return {"hash":hash_obj.decode("UTF-8"), "salt":salt.decode("UTF-8")}
 
 def generate_salt() -> str:
-    return bcrypt.gensalt()
+    return bcrypt.gensalt(rounds=12)
