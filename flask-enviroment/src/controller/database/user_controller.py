@@ -13,15 +13,16 @@ class Actions:
     def validate_login_credentials(self, content):
         # confirm if the email is correct, if so get the user id
         with sessionObj() as session:
-            user_if = session.execute(text(
+            user_id = session.execute(text(
                 "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
-            )).all()
+            )).one()
             hash_password = generate_hash(content["password"], session.execute(text(
-                "SELECT salt FROM hash WHERE user_id = '%s'" % user_if
-            )))
+                "SELECT hash.salt FROM hash WHERE user_id = %s" % user_id[0]
+            )).one()[0])
 
+            pass
             # hash the reviced password with salt id
-
+            
 
             # check if is the same hashed password
             # return user credentials or not
