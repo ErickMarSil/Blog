@@ -10,17 +10,21 @@ export function SigninF(){
         console.log("logged")
     }
 
+    function SigninAction (data){
+        console.log(data);
+    }
+
     const form_element = (
         <div>
-            <form id="signin-form">
+            <form id="signin-form" onSubmit={handleSubmit(SigninAction)}>
                 <div className='name'>
                     <p>Place your name information</p>
-                    <input type='text' placeholder='First name'/>
+                    <input {...register('first_name')} type='text' placeholder='First name'/>
                     <br></br>
-                    <input type='text' placeholder='Last name'/>
+                    <input {...register('last_name')} type='text' placeholder='Last name'/>
                     <br></br>
                     <p>How whould you´d like to call?</p>
-                    <input type='text' placeholder='Nick name'/>
+                    <input {...register('nickname')} type='text' placeholder='Nick name'/>
                 </div>
                 <div className='email'>
                     <p>Place your email information</p>
@@ -33,10 +37,10 @@ export function SigninF(){
                     <input type="password" placeholder="Confirm your password" />
                 </div>
                 <div>
-                    <p></p>
-                    <input type='date'/>
+                    <p>Select your birth date</p>
+                    <input {...register('birth_date')} type='date'/>
                 </div>
-                <button type='submit' onClick={(e) => {SiginRequest(e)}}>Cadastrar</button>
+                <button type='submit'>Cadastrar</button>
             </form>
         </div>
     );
