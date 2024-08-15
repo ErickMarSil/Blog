@@ -1,12 +1,15 @@
 import './login_style.css'
 import { useForm } from "react-hook-form";
-import { axios } from "axios";
+import { useContext } from 'react';
+import { Context } from '../context/AuthContext';
 
 export function LoginF(){
     const { register, handleSubmit } = useForm();
+    const { Login_Request } = useContext("Context")
 
-    function LoginAction (data){
-        
+    async function LoginAction (data){
+        await Login_Request(data);
+        // treat the backend awsner to client
     }
 
     const form_element = (

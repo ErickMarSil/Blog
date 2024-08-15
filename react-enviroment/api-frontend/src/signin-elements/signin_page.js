@@ -5,11 +5,6 @@ export function SigninF(){
 
     const { register, handleSubmit } = useForm();
 
-    const SiginRequest = (e) =>{
-        e.preventDefault();
-        console.log("logged")
-    }
-
     function SigninAction (data){
         console.log(data);
     }
