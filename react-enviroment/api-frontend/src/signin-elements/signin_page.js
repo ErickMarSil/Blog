@@ -9,7 +9,7 @@ export function SigninF(){
     const { Signin_Request } = useContext(SigninContext);
 
     function SigninAction (data){
-        console.log(data);
+        Signin_Request(data);
     }
 
     const form_element = (

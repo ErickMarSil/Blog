@@ -9,7 +9,6 @@ export function LoginF(){
 
     async function LoginAction (data){
         await Login_Request(data);
-        // treat the backend awsner to client
     }
 
     const form_element = (
