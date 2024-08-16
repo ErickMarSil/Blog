@@ -1,11 +1,11 @@
 import './login_style.css'
 import { useForm } from "react-hook-form";
-import { useContext } from 'react';
-import { Context } from '../context/AuthContext';
+import { useContext } from "react";
+import { LoginContext } from '../context/LoginContext';
 
 export function LoginF(){
     const { register, handleSubmit } = useForm();
-    const { Login_Request } = useContext("Context")
+    const { Login_Request } = useContext(LoginContext);
 
     async function LoginAction (data){
         await Login_Request(data);
