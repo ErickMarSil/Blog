@@ -12,17 +12,19 @@ class Actions:
     def validate_login_credentials(self, content):
         # confirm if the email is correct, if so get the user id
         with sessionObj() as session:
-            user_id = session.execute(text(
-                "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
-            )).one()
-            hash_password = generate_hash(content["password"].encode("UTF-8"), session.execute(text(
-                "SELECT hash.salt FROM hash WHERE user_id = %s" % user_id[0]
-            )).one()[0])["hash"]
-
+            try:
+                user_id = session.execute(text(
+                    "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
+                )).one()
+                hash_password = generate_hash(content["password"].encode("UTF-8"), session.execute(text(
+                    "SELECT hash.salt FROM hash WHERE user_id = %s" % user_id[0]
+                )).one()[0])["hash"]
+            except:
+                return {}
+            
             if user_id[4] == hash_password:
                 return {
-                    "first_name":user_id[1],
-                    "last_name":user_id[2],
+                    "name":user_id[1] + " " + user_id[2],
                     "email":user_id[3],
                     "birth_date":user_id[5],
                     "nickname":user_id[6]

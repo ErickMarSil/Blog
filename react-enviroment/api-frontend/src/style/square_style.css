@@ -1,3 +1,7 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
 /* Shared styles for both forms */
 .FullForm {
     max-width: 400px;
@@ -69,9 +73,15 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   #login-form button[type="submit"]:hover {
     background-color: #3e8e41;
+  }
+
+  #status-message {
+    /* add your styles here, e.g. */
+    border: 1px solid #ccc;
+    padding: 5px;
   }
   
   /* Signin Form styles */

@@ -1,3 +1,4 @@
+import './style/square_style.css'
 import { LoginF } from './login-elements/login_page.js'
 import { SigninF } from './signin-elements/signin_page.js';
 

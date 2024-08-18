@@ -1,4 +1,3 @@
-import './signin_style.css'
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { SigninContext } from '../context/SigninContext';
@@ -9,7 +8,7 @@ export function SigninF(){
     const { Signin_Request } = useContext(SigninContext);
 
     function SigninAction (data){
-        Signin_Request(data);
+        Signin_Request(data)
     }
 
     const form_element = (
