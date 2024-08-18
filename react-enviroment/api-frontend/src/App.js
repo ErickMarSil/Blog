@@ -1,10 +1,11 @@
+import './style/square_style.css'
 import { LoginF } from './login-elements/login_page.js'
 import { SigninF } from './signin-elements/signin_page.js';
 
-import { useState } from 'react';
-
 import { LoginContextProvider } from './context/LoginContext.jsx'
 import { SigninContextProvider } from './context/SigninContext.jsx'
+
+import { useState } from 'react';
 
 export default function App(){
     const [method, setMethod] = useState("Login")
@@ -17,7 +18,7 @@ export default function App(){
             <button type='button' onClick={ChangeMethod}> Faça o seu {method} </button>
             {method === "Login" ? 
                 <LoginContextProvider><LoginF /></LoginContextProvider>:
-                <SigninContextProvider><SigninF /></SigninContextProvider>
+                <SigninContextProvider><SigninF ChangeMethod={ChangeMethod}></SigninF></SigninContextProvider>
             }
         </div>
     )

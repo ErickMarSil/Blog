@@ -14,7 +14,7 @@ def validate_information(content):
     credentials_validation = action.validate_login_credentials(content=content)
 
     if len(credentials_validation) > 0:
-        token = generate_token(content)
+        token = generate_token(credentials_validation)
         return {
             "token":token,
             "valid":True,
