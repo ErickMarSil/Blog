@@ -2,13 +2,15 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { SigninContext } from '../context/SigninContext';
 
-export function SigninF(){
+export function SigninF({ ChangeMethod }){
 
     const { register, handleSubmit } = useForm();
     const { Signin_Request } = useContext(SigninContext);
 
     function SigninAction (data){
-        Signin_Request(data)
+        if (Signin_Request(data)){
+            ChangeMethod();
+        }
     }
 
     const form_element = (

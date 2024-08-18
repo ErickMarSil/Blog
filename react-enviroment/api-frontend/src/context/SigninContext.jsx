@@ -21,8 +21,6 @@ export function SigninContextProvider({ children }){
             awnser => {
                 return awnser.data;
             }
-        ).catch(
-            console.log("wasn´t able to connect with the server")
         )
         
         return redirect;
