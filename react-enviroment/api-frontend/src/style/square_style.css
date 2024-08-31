@@ -15,7 +15,7 @@
   .FullForm button[type="button"] {
     width: 100%;
     height: 40px;
-    background-color: #4CAF50;
+    background-color: rgb(83, 76, 175);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -24,7 +24,7 @@
   }
   
   .FullForm button[type="button"]:hover {
-    background-color: #3e8e41;
+    background-color: rgb(83, 76, 175);
   }
   
   /* Login Form styles */
@@ -56,7 +56,7 @@
   
   #login-form a {
     font-size: 14px;
-    color: #666;
+    color: #6193ff;
     text-decoration: none;
   }
   
@@ -67,7 +67,7 @@
   #login-form button[type="submit"] {
     width: 100%;
     height: 40px;
-    background-color: #4CAF50;
+    background-color: rgb(83, 76, 175);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -75,7 +75,7 @@
   }
 
   #login-form button[type="submit"]:hover {
-    background-color: #3e8e41;
+    background-color: rgb(83, 76, 175);
   }
 
   #status-message {
@@ -83,7 +83,7 @@
     border: 1px solid #ccc;
     padding: 5px;
   }
-  
+
   /* Signin Form styles */
   #signin-form {
     padding: 20px;
@@ -118,7 +118,7 @@
   #signin-form button[type="submit"] {
     width: 100%;
     height: 40px;
-    background-color: #4CAF50;
+    background-color: rgb(83, 76, 175);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -126,5 +126,11 @@
   }
   
   #signin-form button[type="submit"]:hover {
-    background-color: #3e8e41;
+    background-color: rgb(83, 76, 175);
+  }
+
+  #login-status-message {
+    /* add your styles here, e.g. */
+    border: 1px solid #ccc;
+    padding: 5px;
   }

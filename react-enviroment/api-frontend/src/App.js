@@ -1,8 +1,8 @@
 'use client';
 
 import './style/square_style.css'
-import { LoginF } from './login-elements/login_page.js'
-import { SigninF } from './signin-elements/signin_page.js';
+import { LoginF } from './pages/login-elements/login_page.js'
+import { SigninF } from './pages/signin-elements/signin_page.js';
 
 import { LoginContextProvider } from './context/LoginContext.jsx'
 import { SigninContextProvider } from './context/SigninContext.jsx'

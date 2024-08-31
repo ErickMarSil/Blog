@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useState } from "react";
 import { setCookie } from 'nookies';
 import { jwtDecode } from 'jwt-decode';
+import { useRouter } from "next/navigation";
 
 export const LoginContext = createContext({LoginContextProvider})
 
@@ -10,7 +11,8 @@ export function LoginContextProvider({children}){
     const [user, setUser] = useState(undefined);
     const [awnser, setAwnser] = useState(null);
     const isAuthenticated = !!user;
-
+    const router = useRouter()
+ 
     // Responsable to make request and set all data information
     const Login_Request = async ({ email, password }) => {
         const { message, token, valid } = await axios.post(
@@ -31,7 +33,7 @@ export function LoginContextProvider({children}){
         if (valid){
             const payload = jwtDecode(token);
             setUser(payload);
-            /* redirect to main page */
+            router.push("/lobby");
         }
         setAwnser(<i id="status-message">{message}</i>);
     } 
