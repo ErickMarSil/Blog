@@ -9,8 +9,9 @@ export const LoginContext = createContext({LoginContextProvider})
 export function LoginContextProvider({children}){
     // Public infomations for childrens components
     const [user, setUser] = useState(undefined);
-    const [awnser, setAwnser] = useState(null);
+    const [Awnser, setAwnser] = useState(null);
     const isAuthenticated = !!user;
+    console.log(isAuthenticated);
     const router = useRouter()
  
     // Responsable to make request and set all data information
@@ -19,27 +20,25 @@ export function LoginContextProvider({children}){
             "http://127.0.0.1:5000/login",
             { email, password }
         ).then(
-            awnser => {
-                return awnser.data;
+            Awnser => {
+                return Awnser.data;
             }
         );
-
-        setCookie(undefined, 'blog.token', {token}, {
-            maxAge: (60 * 60)
-        });
-        
         // Decode the payload from token
 
         if (valid){
-            const payload = jwtDecode(token);
-            setUser(payload);
+            setCookie(undefined, 'blog.token', {token}, {
+                maxAge: (60 * 60)
+            });
+            setUser(jwtDecode(token));
+            // console.log(isAuthenticated);
             router.push("/lobby");
         }
         setAwnser(<i id="status-message">{message}</i>);
     } 
 
     return(
-        <LoginContext.Provider value={{ Login_Request, isAuthenticated, awnser}}>
+        <LoginContext.Provider value={{ Login_Request, isAuthenticated, Awnser}}>
             {children}
         </LoginContext.Provider>
     )
