@@ -1,4 +1,4 @@
-import App from './App';
+import App from './pages/Login/mainApp/App';
 import ReactDOM from 'react-dom/client';
 import React from 'react';
 
