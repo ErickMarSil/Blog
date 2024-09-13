@@ -1,21 +1,32 @@
 .FullForm {
-  display: flex; /* Use flexbox for easy alignment */
-  flex-direction: column; /* Arrange items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically */
-  height: 100vh; /* Take up full viewport height */
+  display: flex;
+  position: relative; /* Crucial for absolute positioning of the mainbox */
+  width: 600px; /* Adjust as needed, double the width of a single form */
+  height: 300px;
+  border: 1px solid #ccc;
+  margin: 0 auto; /* Center the container horizontally */
+  overflow: hidden; /* Hide any overflow from the moving mainbox */
+}
+
+.mainbox {
+  position: absolute;
+  width: 50%; /* Cover half of the FullForm */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: left 0.3s ease-in-out; /* Smooth transition for movement */
+  left: 0; /* Initial position on the left */
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
-  width: 300px; /* Adjust width as needed */
-  height: 300px; /* Set a fixed height for the square */
-  border: 1px solid #ccc;
+  width: 100%; /* Take up full width of its half */
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: auto; /* Add scrollbar if content overflows */
 }
 
 /* Additional styles for form elements (input, button, etc.) can be added here */
