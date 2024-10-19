@@ -12,30 +12,17 @@ import { useState } from 'react';
 
 export default function App(){
     const [method, setMethod] = useState("Login")
-    const mainboxRef = useRef(null);
 
     function ChangeMethod(){
         setMethod(prevMethod => (prevMethod === "Login" ? "Signin" : "Login"))
-        if (mainboxRef.current) {
-            mainboxRef.current.style.left = method === "Login" ? "50%" : "0";
-        }
     }
     return  (
         <div className='FullForm'>
-            <div className='mainbox' ref={mainboxRef}>
-                <h1>Seja bem vindo</h1>
-                <p>Coloque suas informações para inciar o { method }</p>
-                <button type='button' onClick={ChangeMethod}> Faça o seu {method} </button> 
-            </div>
-            <LoginContextProvider><LoginF /></LoginContextProvider>
-            <SigninContextProvider><SigninF ChangeMethod={ChangeMethod}></SigninF></SigninContextProvider>
+            <button type='button' onClick={ChangeMethod}> Faça o seu {method} </button>
+            {method === "Login" ?
+                <LoginContextProvider><LoginF /></LoginContextProvider>:
+                <SigninContextProvider><SigninF ChangeMethod={ChangeMethod}></SigninF></SigninContextProvider>
+            }
         </div>
-        // <div className='FullForm'>
-        //     <button type='button' onClick={ChangeMethod}> Faça o seu {method} </button>
-        //     {method === "Login" ? 
-        //         <LoginContextProvider><LoginF /></LoginContextProvider>:
-        //         <SigninContextProvider><SigninF ChangeMethod={ChangeMethod}></SigninF></SigninContextProvider>
-        //     }
-        // </div>
     )
 }

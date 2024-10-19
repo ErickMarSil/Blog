@@ -1,32 +1,130 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
+/* Shared styles for both forms */
 .FullForm {
-  display: flex;
-  position: relative; /* Crucial for absolute positioning of the mainbox */
-  width: 600px; /* Adjust as needed, double the width of a single form */
-  height: 300px;
-  border: 1px solid #ccc;
-  margin: 0 auto; /* Center the container horizontally */
-  overflow: hidden; /* Hide any overflow from the moving mainbox */
-}
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .FullForm button[type="button"] {
+    width: 100%;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .FullForm button[type="button"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Login Form styles */
+  #login-form {
+    padding: 20px;
+  }
+  
+  #login-form p {
+    margin-top: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  #login-form input[type="text"],
+  #login-form input[type="password"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #login-form input[type="text"]:focus,
+  #login-form input[type="password"]:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #login-form a {
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+  }
+  
+  #login-form a:hover {
+    text-decoration: underline;
+  }
+  
+  #login-form button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-.mainbox {
-  position: absolute;
-  width: 50%; /* Cover half of the FullForm */
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  transition: left 0.3s ease-in-out; /* Smooth transition for movement */
-  left: 0; /* Initial position on the left */
-}
+  #login-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Take up full width of its half */
-  padding: 20px;
-}
-
-/* Additional styles for form elements (input, button, etc.) can be added here */
+  #status-message {
+    /* add your styles here, e.g. */
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  /* Signin Form styles */
+  #signin-form {
+    padding: 20px;
+  }
+  
+  #signin-form p {
+    margin-top: 0;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  #signin-form input[type="text"],
+  #signin-form input[type="email"],
+  #signin-form input[type="password"],
+  #signin-form input[type="date"] {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #signin-form input[type="text"]:focus,
+  #signin-form input[type="email"]:focus,
+  #signin-form input[type="password"]:focus,
+  #signin-form input[type="date"]:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #signin-form button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #signin-form button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }

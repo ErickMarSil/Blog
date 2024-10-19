@@ -31,7 +31,6 @@ export function LoginContextProvider({children}){
                 maxAge: (60 * 60)
             });
             setUser(jwtDecode(token));
-            // console.log(isAuthenticated);
             router.push("/lobby");
         }
         setAwnser(<i id="status-message">{message}</i>);

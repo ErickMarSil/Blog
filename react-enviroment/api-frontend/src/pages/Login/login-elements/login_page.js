@@ -4,7 +4,7 @@ import { LoginContext } from '../../../context/LoginContext';
 
 export function LoginF(){
     const { register, handleSubmit } = useForm();
-    const { Login_Request, awnser } = useContext(LoginContext);
+    const { Login_Request, Awnser } = useContext(LoginContext);
 
     async function LoginAction (data){
         await Login_Request(data);
@@ -13,7 +13,7 @@ export function LoginF(){
     const form_element = (
         <>
             <div>
-                { awnser }
+                { Awnser }
                 <form id="login-form" onSubmit={handleSubmit(LoginAction)}>
                     <p>Place your credentials in fields bellow</p>
                     <input {...register('email')} type="text" placeholder="Enter your email"></input>
