@@ -1,5 +1,5 @@
 from flask import request
-from src.controller.database.user_controller import Actions
+from src.controller.users.user_controller import Actions
 import datetime
 action = Actions()
 

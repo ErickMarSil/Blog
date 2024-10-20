@@ -5,6 +5,7 @@ from src import db
 from src.routes.login_bp_env.configure import login_bp
 from src.routes.sigin_bp_env.configure import signin_bp
 from src.routes.lobby_bp_env.configure import lobby_bp
+from src.routes.post_bp_env.configure import post_bp
 
 from flask_cors import CORS
 from flask import Flask
@@ -24,6 +25,7 @@ def setConfigs(app:Flask) -> Flask:
     app.register_blueprint(login_bp)
     app.register_blueprint(signin_bp)
     app.register_blueprint(lobby_bp)
+    app.register_blueprint(post_bp)
 
     # set the application as CORS
     CORS(app)

@@ -1,4 +1,4 @@
-from src.controller.database.user_controller import Actions
+from src.controller.users.user_controller import Actions
 from src.services.token.auth_actions import generate_token
 action = Actions()
 
