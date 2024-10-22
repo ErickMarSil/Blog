@@ -1,5 +1,7 @@
 from src.models.post_model import Post
-from src.controller.posts import post_session
+from src.controller.posts import session_obj
+from sqlalchemy.sql import text
+from datetime import datetime
 
 class Actions:
     def __self__ (self):
@@ -7,19 +9,26 @@ class Actions:
 
     def set_infos(self, content):
         self.PostInstance = Post()
-        self.PostInstance.title = content["title"]
-        self.PostInstance.content = content["content"]
+        self.PostInstance.nm_title = content["title"]
+        self.PostInstance.dt_created = datetime.now()
         self.PostInstance.parent_id = content["parent_id"]
 
-        with post_session() as session:
+        with session_obj() as session:
+            self.PostInstance.id_author = session.execute(
+                text(
+                    """
+                        SELECT id FROM users_info WHERE nick_name = %s;
+                    """ % content["author"]
+                )
+            ).all()[0]
+
             session.add(instance=self.PostInstance)
             session.commit()
     
     def get_infos(self, content):
-        with post_session() as session:
+        with session_obj() as session:
             query = str(
-                """
-                WITH RECURSIVE model AS (
+                """WITH RECURSIVE model AS (
                     SELECT id, title, content
                     FROM posts
                     WHERE id = :id
@@ -29,12 +38,10 @@ class Actions:
                     SELECT p.id, p.title, p.content
                     FROM posts as p
                     JOIN model as m ON p.parent_id = m.id
+                    
                 )
-                SELECT * FROM model.
-                """
+                SELECT * FROM model;"""
             )
-            session.execute(
-                query, params={"id":content["id"]}
-            )
-            pass
-        return
+            return session.execute(
+                text(query), params={"id":content["id"]}
+            ).all()

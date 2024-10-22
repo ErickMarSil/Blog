@@ -1,4 +1,4 @@
-from src.controller.users import user_session
+from src.controller.users import session_obj
 from src.models.users_model import Users, Hash
 from src.services.hash.hash_actions import generate_hash
 
@@ -11,7 +11,7 @@ class Actions:
 
     def validate_login_credentials(self, content):
         # confirm if the email is correct, if so get the user id
-        with user_session() as session:
+        with session_obj() as session:
             try:
                 user_id = session.execute(text(
                     "SELECT * FROM users_info WHERE email = '%s'" % content["email"]
@@ -35,7 +35,7 @@ class Actions:
 
     def insert_signin_credentiasl(self, content) -> bool:
         try:
-            with sessionObj() as session:
+            with session_obj() as session:
                 # check if email already exist
                 if session.execute(text(
                     "SELECT * FROM users_info WHERE email = '%s';" % content["email"]
