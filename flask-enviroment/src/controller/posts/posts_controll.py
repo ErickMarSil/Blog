@@ -38,17 +38,9 @@ class Actions:
 
         pass
 
-    def get_single_post(self, content):
+    def get_single_post(self, id):
         with session_obj() as session:
-            id = session.execute(
-                "SELECT id FROM posts WHERE title=:nm_title AND id_author=:id_author", 
-                params={
-                    "nm_title":content["nm_title"],
-                    "id_author":content["id_author"]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                }
-            ).all()
-
-            if id == None or len(id) == 0:
+            if id == 0:
                 return{
                     "content":None,
                     "status":None,
@@ -60,12 +52,9 @@ class Actions:
                     SELECT 
                         p.id, 
                         p.nm_title, 
-                        p.dt_created, 
-                        ui.nickname,
-                        ui.email,
-                        ui.birth_date
+                        p.dt_created,
+                        p.parent_id
                     FROM posts as p
-                    JOIN users_info as ui ON p.id_author = ui.id
                     WHERE p.id = :id
 
                     UNION ALL 
@@ -73,19 +62,17 @@ class Actions:
                     SELECT 
                         p.id, 
                         p.nm_title, 
-                        p.dt_created, 
-                        ui.nickname, 
-                        ui.email,
-                        ui.birth_date
+                        p.dt_created,
+                        p.parent_id
                     FROM posts as p
-                    JOIN users_info as ui ON p.id_author = ui.id
                     JOIN model as m ON p.parent_id = m.id
-                    LIMIT 5
                 )
                 SELECT * FROM model;"""
             )
+            post = session.execute(text(query), params={"id":id["id"]}).all()
+            post = [{"id":content.id, "nm_title":content.nm_title, "dt_created":content.dt_created, "parent_id":content.parent_id} for content in post]
             return{
-                "content":session.execute(text(query), params={"id":id}).all(),
+                "content":post,
                 "status":"Founded",
-                "message":"Post from %s created %s" % ("temp", "01-01-2000")
+                "message":"Successfully getted all content!"
             }
