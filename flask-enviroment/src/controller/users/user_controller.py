@@ -1,4 +1,4 @@
-from src.controller.users import session_obj
+from src.controller import session_obj
 from src.models.users_model import Users, Hash
 from src.services.hash.hash_actions import generate_hash
 
@@ -24,6 +24,7 @@ class Actions:
             
             if user_id[4] == hash_password:
                 return {
+                    "user_id":user_id[0],
                     "name":user_id[1] + " " + user_id[2],
                     "email":user_id[3],
                     "birth_date":user_id[5],

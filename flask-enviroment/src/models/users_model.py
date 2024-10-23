@@ -1,8 +1,6 @@
 from sqlalchemy import Column,  BIGINT, Date, VARCHAR, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
-base = declarative_base()
+from src.models import base
 
 class Users(base):
     __tablename__ = "users_info"
