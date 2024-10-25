@@ -1,6 +1,4 @@
-from sqlalchemy                 import Column,  BIGINT, VARCHAR, TIMESTAMP, ForeignKey
-from src.models.users_model     import Users
-from sqlalchemy.orm             import relationship
+from sqlalchemy                 import Column,  BIGINT, VARCHAR, TIMESTAMP
 from src.models import base
 
 class Post(base):
@@ -10,6 +8,4 @@ class Post(base):
     nm_title = Column(VARCHAR(25), nullable=False)
     dt_created = Column(TIMESTAMP, nullable=False)
     parent_id = Column(BIGINT, nullable=False)
-    id_author = Column(BIGINT, ForeignKey("users_info.id"), nullable=False)
-
-    user = relationship("Users", backref="posts")
+    id_author = Column(BIGINT, nullable=False)
